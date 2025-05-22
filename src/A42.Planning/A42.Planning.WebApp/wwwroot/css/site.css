@@ -1,11 +1,11 @@
-html {
-  font-size: 14px;
+:root {
+    --green: #27820E;
+    --offwhite: #f1f1f1;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+html {
+  font-size: 16px;
+  height: 100%;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -18,7 +18,9 @@ html {
 }
 
 body {
+  display: flex;
   margin-bottom: 60px;
+  height: 100%;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +30,19 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.navbar {
+    min-width: 300px;
+    width: 300px;
+    padding: 0;
+    background-color: var(--offwhite);
+}
+
+.navbar-brand-container {
+    background-color: var(--green);
+}
+
+.navbar-brand-container span {
+    color: var(--offwhite);
 }

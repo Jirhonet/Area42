@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace A42.Planning.WebApp.Pages
+namespace A42.Planning.WebApp.Pages.Teams
 {
     public class IndexModel : PageModel
     {
