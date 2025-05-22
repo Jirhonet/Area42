@@ -21,5 +21,20 @@ namespace A42.Planning.Data.Repositories
 
             return Query<TeamDto>(sql);
         }
+
+        public int Insert(TeamDto team)
+        {
+            const string sql = """
+                INSERT INTO Team (Name)
+                VALUES (@Name)
+                """;
+
+            var param = new
+            {
+                Name = team.Name,
+            };
+
+            return Execute(sql, param);
+        }
     }
 }

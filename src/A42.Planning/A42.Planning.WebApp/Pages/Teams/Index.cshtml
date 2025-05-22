@@ -1,5 +1,6 @@
 ﻿@page
 @namespace A42.Planning.WebApp.Pages.Teams
+@using A42.Planning.Domain
 @model IndexModel
 @{
     ViewData["Title"] = "Teams";
@@ -8,3 +9,47 @@
 <div class="text-center">
     <h1 class="display-4">Teams</h1>
 </div>
+
+<div class="toolbar">
+    <button onclick="showDialog()">+ Add</button>
+</div>
+
+<ul class="list-group header">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>Name</span>
+    </li>
+</ul>
+
+@if (Model.Teams != null && Model.Teams.Any())
+{
+    <ul class="list-group">
+        @foreach (Team team in @Model.Teams)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>@team.Name</span>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No teams found.</p>
+}
+
+<form method="POST" id="dialog" class="dialog" style="display: none;">
+    <p><b>Add new team</b></p>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="New team">
+    <br />
+    <input type="submit" onclick="hideDialog()" value="Add">
+</form>
+
+<script>
+  function showDialog() {
+      document.getElementById("dialog").style.display = "flex";
+  }
+
+  function hideDialog() {
+      document.getElementById("dialog").style.display = "none";
+  }
+</script>

@@ -21,5 +21,20 @@ namespace A42.Planning.Data.Repositories
 
             return Query<LocationDto>(sql);
         }
+
+        public int Insert(LocationDto location)
+        {
+            const string sql = """
+                INSERT INTO ParkLocation (Name)
+                VALUES (@Name)
+                """;
+
+            var param = new
+            {
+                Name = location.Name,
+            };
+
+            return Execute(sql, param);
+        }
     }
 }

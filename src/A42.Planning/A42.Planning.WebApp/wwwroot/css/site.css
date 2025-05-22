@@ -23,6 +23,11 @@ body {
   height: 100%;
 }
 
+main {
+    position: relative;
+    height: 100%;
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;
@@ -45,4 +50,53 @@ body {
 
 .navbar-brand-container span {
     color: var(--offwhite);
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+    width: 500px;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dialog input {
+    border-radius: 8px;
+    border-width: 1px;
+    padding: .25em;
+}
+
+.dialog label {
+    padding-bottom: .25em;
+}
+
+input[type="submit"] {
+    background-color: var(--green);
+    color: var(--offwhite);
+    border-width: 0;
+    padding: .5em;
+}
+
+.toolbar {
+    padding-top: .25em;
+    padding-bottom: .25em;
+}
+
+.toolbar button {
+    background-color: var(--green);
+    color: var(--offwhite);
+    border-radius: 8px;
+    border-width: 0;
+    padding: .5em;
+    min-width: 100px;
+}
+
+.header li {
+    border-color: white;
+    font-weight: bold;
 }
