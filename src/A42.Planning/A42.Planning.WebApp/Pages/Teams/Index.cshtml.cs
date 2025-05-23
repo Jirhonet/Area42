@@ -17,6 +17,9 @@ namespace A42.Planning.WebApp.Pages.Teams
         [BindProperty]
         public IEnumerable<Team> Teams { get; private set; } = [];
 
+        [BindProperty]
+        public string Name { get; set; } = string.Empty;
+
         public void OnGet()
         {
             Load();
@@ -24,13 +27,25 @@ namespace A42.Planning.WebApp.Pages.Teams
 
         public void OnPost()
         {
-            //_teamService.AddTeam();
+            Team team = new Team(
+                name: Name,
+                employees: []
+            );
+
+            _teamService.Add(team);
+
+            ResetForm();
             Load();
         }
 
         public void Load()
         {
             Teams = _teamService.Get();
+        }
+
+        private void ResetForm()
+        {
+            Name = string.Empty;
         }
     }
 }

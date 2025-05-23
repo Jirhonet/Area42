@@ -10,6 +10,16 @@
     <h1 class="display-4">Locations</h1>
 </div>
 
+<div class="toolbar">
+    <button onclick="showDialog()">+ Add</button>
+</div>
+
+<ul class="list-group header">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>Name</span>
+    </li>
+</ul>
+
 @if (Model.Locations != null && Model.Locations.Any())
 {
     <ul class="list-group">
@@ -23,11 +33,23 @@
 }
 else
 {
-    <p>No locations found.</p>
+    <p class="w-100 text-center">No locations found.</p>
 }
 
-<form method="POST">
+<form method="POST" id="dialog" class="dialog" style="display: none;">
+    <p><b>Add new location</b></p>
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="New location"><br /><br />
-    <input type="submit" value="Add">
+    <input type="text" id="name" name="name" placeholder="New location" value="@Model.Name">
+    <br />
+    <input type="submit" onclick="hideDialog()" value="Add">
 </form>
+
+<script>
+    function showDialog() {
+        document.getElementById("dialog").style.display = "flex";
+    }
+
+    function hideDialog() {
+        document.getElementById("dialog").style.display = "none";
+    }
+</script>

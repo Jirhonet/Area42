@@ -17,14 +17,32 @@ namespace A42.Planning.WebApp.Pages.Locations
         [BindProperty]
         public IEnumerable<Location> Locations { get; private set; } = [];
 
+        [BindProperty]
+        public string Name { get; set; } = string.Empty;
+
         public void OnGet()
         {
-            Locations = _locationService.Get();
+            Load();
         }
 
         public void OnPost()
         {
-            //_locationService.AddLocation();
+            Location location = new Location(Name);
+
+            _locationService.Add(location);
+
+            ResetForm();
+            Load();
+        }
+
+        public void Load()
+        {
+            Locations = _locationService.Get();
+        }
+
+        private void ResetForm()
+        {
+            Name = string.Empty;
         }
     }
 }
