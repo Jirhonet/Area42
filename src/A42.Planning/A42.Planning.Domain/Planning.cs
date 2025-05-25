@@ -1,6 +1,4 @@
-﻿using A42.Planning.Domain.Helpers;
-
-namespace A42.Planning.Domain
+﻿namespace A42.Planning.Domain
 {
     public class Planning
     {
@@ -8,7 +6,8 @@ namespace A42.Planning.Domain
 
         public Planning(DateOnly date, Team team, IEnumerable<PlanningItem> items)
         {
-            items.All(ValidateItem);
+            if (!items.All(ValidateItem))
+                throw new InvalidOperationException("Invalid items in planning.");
 
             Date = date;
             Team = team;
@@ -20,19 +19,15 @@ namespace A42.Planning.Domain
         public IReadOnlyList<PlanningItem> Items
             => _items;
 
-        public void PlanItem(PlanningItem item)
+        public bool PlanItem(PlanningItem item)
         {
             _items.Add(item);
+
+            return true;
         }
 
         private bool ValidateItem(PlanningItem item)
         {
-            if (item.Start.AsDate() != Date)
-                throw new InvalidOperationException("Item date does not match planning date.");
-
-            if (item.End.AsDate() != Date)
-                throw new InvalidOperationException("Item date does not match planning date.");
-
             if (_items.Any(i => i.Start == item.Start && i.End == item.End))
                 throw new InvalidOperationException("Item already exists in planning.");
 

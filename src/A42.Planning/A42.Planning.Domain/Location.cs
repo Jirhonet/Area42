@@ -2,11 +2,13 @@
 {
     public class Location
     {
-        public Location(string name)
+        public Location(int id, string name)
         {
+            Id = id;
             Name = name;
         }
 
-        public string Name { get; private init; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
     }
 }

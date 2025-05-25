@@ -4,13 +4,15 @@
     {
         private List<Employee> _employees;
 
-        public Team(string name, List<Employee> employees)
+        public Team(int id, string name, List<Employee> employees)
         {
+            Id = id;
             Name = name;
             _employees = employees;
         }
 
-        public string Name { get; private init; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
         public IReadOnlyList<Employee> Employees
             => _employees;
 

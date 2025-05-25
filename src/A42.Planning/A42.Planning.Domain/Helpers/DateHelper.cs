@@ -2,9 +2,9 @@
 {
     public static class DateHelper
     {
-        public static DateOnly AsDate(this DateTimeOffset dateTimeOffset)
+        public static DateTimeOffset ToDateTimeOffset(this TimeOnly time, DateOnly date)
         {
-            return new DateOnly(dateTimeOffset.Year, dateTimeOffset.Month, dateTimeOffset.Day);
+            return new DateTimeOffset(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second, TimeSpan.Zero);
         }
     }
 }
