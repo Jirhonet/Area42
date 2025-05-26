@@ -16,12 +16,14 @@
         public IReadOnlyList<Employee> Employees
             => _employees;
 
-        public void AddEmployee(Employee employee)
+        public bool AddEmployee(Employee employee)
         {
             if (Employees.Any(e => e.Id == employee.Id))
                 throw new InvalidOperationException($"Employee '{employee.FullName}' is already in team {Name}.");
 
             _employees.Add(employee);
+
+            return true;
         }
     }
 }

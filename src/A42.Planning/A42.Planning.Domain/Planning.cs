@@ -19,7 +19,7 @@
         public IReadOnlyList<PlanningItem> Items
             => _items;
 
-        public bool PlanItem(PlanningItem item)
+        public bool AddItem(PlanningItem item)
         {
             _items.Add(item);
 
