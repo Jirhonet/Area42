@@ -4,10 +4,12 @@ namespace A42.Planning.Data.Repositories
 {
     public class PlanningItemRepository : RepositoryBase
     {
-        public PlanningItemRepository(DataContext dataContext)
+        private readonly LocationRepository _locationRepository;
+
+        public PlanningItemRepository(DataContext dataContext, LocationRepository locationRepository)
             : base(dataContext)
         {
-            //
+            _locationRepository = locationRepository;
         }
 
         public IEnumerable<PlanningItemDto> Get(DateOnly date, int teamId)
@@ -15,6 +17,7 @@ namespace A42.Planning.Data.Repositories
             const string sql = """
                 SELECT
                     p.Id,
+                    p.Title,
                     p.LocationId,
                     p.TeamId,
                     p.Start,
@@ -32,19 +35,27 @@ namespace A42.Planning.Data.Repositories
                 TeamId = teamId,
             };
 
+            //IEnumerable<PlanningItemDto> planningItems = Query<PlanningItemDto>(sql, param);
+
+            //foreach (PlanningItemDto )
+            //{
+
+            //}
+
             return Query<PlanningItemDto>(sql, param);
         }
 
         public int Insert(PlanningItemDto planningItem)
         {
             const string sql = """
-                INSERT INTO PlanningItem (LocationId, TeamId, Start, End)
-                VALUES (@LocationId, @TeamId, @Start, @End)
+                INSERT INTO PlanningItem (Title, LocationId, TeamId, Start, End)
+                VALUES (@Title, @LocationId, @TeamId, @Start, @End)
                 """;
 
             var param = new
             {
-                LocationId = planningItem.LocationId,
+                Title = planningItem.Title,
+                LocationId = planningItem.Location.Id,
                 TeamId = planningItem.TeamId,
                 Start = planningItem.Start,
                 End = planningItem.End,

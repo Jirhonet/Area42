@@ -1,5 +1,5 @@
 using A42.Planning.Domain;
-using A42.Planning.Domain.Services;
+using A42.Planning.Domain.Abstractions.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,9 +7,9 @@ namespace A42.Planning.WebApp.Pages.Locations
 {
     public class IndexModel : PageModel
     {
-        private readonly LocationService _locationService;
+        private readonly ILocationService _locationService;
 
-        public IndexModel(LocationService locationService)
+        public IndexModel(ILocationService locationService)
         {
             _locationService = locationService;
         }
@@ -27,7 +27,7 @@ namespace A42.Planning.WebApp.Pages.Locations
 
         public void OnPost()
         {
-            Location location = new Location(Name);
+            Location location = new Location(0, Name);
 
             _locationService.Add(location);
 

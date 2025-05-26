@@ -9,7 +9,8 @@ namespace A42.Planning.Domain.Helpers.Mappers
             PlanningItemDto planningItemDto = new PlanningItemDto()
             {
                 Id = planningItem.Id,
-                LocationId = planningItem.Location.Id,
+                Title = planningItem.Title,
+                Location = planningItem.Location.ToDto(),
                 TeamId = team.Id,
                 Start = planningItem.Start.ToDateTimeOffset(date),
                 End = planningItem.End.ToDateTimeOffset(date)
@@ -23,7 +24,9 @@ namespace A42.Planning.Domain.Helpers.Mappers
             PlanningItem planningItem = new PlanningItem(
                 id: planningItemDto.Id,
                 title: planningItemDto.Title,
-
+                location: planningItemDto.Location.ToDomain(),
+                start: planningItemDto.Start.ToTimeOnly(),
+                end: planningItemDto.End.ToTimeOnly()
             );
 
             return planningItem;

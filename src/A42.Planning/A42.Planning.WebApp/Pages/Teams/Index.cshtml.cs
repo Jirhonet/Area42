@@ -1,5 +1,5 @@
 using A42.Planning.Domain;
-using A42.Planning.Domain.Services;
+using A42.Planning.Domain.Abstractions.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,9 +7,9 @@ namespace A42.Planning.WebApp.Pages.Teams
 {
     public class IndexModel : PageModel
     {
-        private readonly TeamService _teamService;
+        private readonly ITeamService _teamService;
 
-        public IndexModel(TeamService teamService)
+        public IndexModel(ITeamService teamService)
         {
             _teamService = teamService;
         }
@@ -28,6 +28,7 @@ namespace A42.Planning.WebApp.Pages.Teams
         public void OnPost()
         {
             Team team = new Team(
+                id: 0,
                 name: Name,
                 employees: []
             );

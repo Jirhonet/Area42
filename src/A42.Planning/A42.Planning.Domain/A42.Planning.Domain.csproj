@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\A42.Planning.Data\A42.Planning.Data.csproj" />
+    <ProjectReference Include="..\A42.Planning.Domain.Abstractions\A42.Planning.Domain.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

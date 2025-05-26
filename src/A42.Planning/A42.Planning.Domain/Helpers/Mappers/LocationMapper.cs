@@ -17,6 +17,7 @@ namespace A42.Planning.Domain.Helpers.Mappers
         internal static Location ToDomain(this LocationDto locationDto)
         {
             Location location = new Location(
+                id: locationDto.Id,
                 name: locationDto.Name
             );
 

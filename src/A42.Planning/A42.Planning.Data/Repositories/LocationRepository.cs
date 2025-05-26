@@ -22,6 +22,25 @@ namespace A42.Planning.Data.Repositories
             return Query<LocationDto>(sql);
         }
 
+        public LocationDto GetById(int id)
+        {
+            const string sql = """
+                SELECT
+                    l.Id,
+                    l.Name
+                FROM ParkLocation l
+                WHERE
+                    l.Id = @Id
+                """;
+
+            var param = new
+            {
+                Id = id,
+            };
+
+            return QuerySingle<LocationDto>(sql, param);
+        }
+
         public int Insert(LocationDto location)
         {
             const string sql = """

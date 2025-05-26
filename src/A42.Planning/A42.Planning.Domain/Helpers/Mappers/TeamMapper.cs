@@ -17,6 +17,7 @@ namespace A42.Planning.Domain.Helpers.Mappers
         internal static Team ToDomain(this TeamDto teamDto)
         {
             Team team = new Team(
+                id: teamDto.Id,
                 name: teamDto.Name,
                 employees: []
             );
