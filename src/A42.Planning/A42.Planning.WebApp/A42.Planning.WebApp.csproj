@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\A42.Planning.Data.Abstractions\A42.Planning.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\A42.Planning.Data\A42.Planning.Data.csproj" />
     <ProjectReference Include="..\A42.Planning.Domain\A42.Planning.Domain.csproj" />
   </ItemGroup>
 

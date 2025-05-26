@@ -1,6 +1,6 @@
 ﻿namespace A42.Planning.Data.Abstractions
 {
-    public interface ILocationRepository
+    public interface IPlanningService
     {
 
     }

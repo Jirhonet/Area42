@@ -3,6 +3,8 @@
     [TestClass]
     public partial class PlanningTests
     {
+        //private readonly
+
         [TestMethod]
         public void TestMethod1()
         {

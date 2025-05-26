@@ -1,11 +1,11 @@
-﻿using A42.Planning.Data.Dtos;
+﻿using A42.Planning.Data.Abstractions;
+using A42.Planning.Data.Dtos;
 using A42.Planning.Data.Repositories;
-using A42.Planning.Domain.Abstractions.Interfaces;
 using A42.Planning.Domain.Helpers.Mappers;
 
 namespace A42.Planning.Domain.Services
 {
-    public class PlanningService : IPlanningService, IService
+    public class PlanningService : IPlanningService
     {
         private readonly PlanningItemRepository _planningItemRepository;
 
