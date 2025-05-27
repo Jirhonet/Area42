@@ -8,8 +8,8 @@ namespace A42.Planning.Domain
 
         public Planning(DateOnly date, Team team, IEnumerable<PlanningItem> items)
         {
-            if (!items.All(ValidateItem))
-                throw new InvalidOperationException("Invalid items in planning.");
+            foreach (PlanningItem item in items)
+                AddItem(item);
 
             Date = date;
             Team = team;
@@ -35,6 +35,13 @@ namespace A42.Planning.Domain
 
             if (_items.Any(i => i.Start < item.End && i.End > item.Start))
                 throw new InvalidOperationException("Item overlaps with existing items.");
+
+            return true;
+        }
+
+        public bool RemoveItem(PlanningItem item)
+        {
+            _items.Remove(item);
 
             return true;
         }
