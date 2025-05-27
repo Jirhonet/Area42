@@ -22,6 +22,9 @@ namespace A42.Planning.Tests
             // Assert
             locations.Should().NotBeNullOrEmpty();
             locations.Should().HaveCount(3);
+            locations.Should().Contain(location1);
+            locations.Should().Contain(location2);
+            locations.Should().Contain(location3);
         }
     }
 }
