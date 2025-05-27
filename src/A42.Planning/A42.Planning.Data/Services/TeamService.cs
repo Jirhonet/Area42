@@ -14,12 +14,14 @@ namespace A42.Planning.Domain.Services
             _teamRepository = teamRepository;
         }
 
+        /// <inheritdoc />
         public IEnumerable<Team> Get()
         {
             IEnumerable<TeamDto> teamDtos = _teamRepository.Get();
             return teamDtos.Select(teamDto => teamDto.ToDomain());
         }
 
+        /// <inheritdoc />
         public void Add(Team team)
         {
             TeamDto teamDto = team.ToDto();

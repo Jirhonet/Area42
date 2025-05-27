@@ -16,10 +16,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="8.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.12.6" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.3" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="MSTest" Version="3.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\A42.Planning.Data.Abstractions\A42.Planning.Data.Abstractions.csproj" />
+    <ProjectReference Include="..\A42.Planning.Domain\A42.Planning.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

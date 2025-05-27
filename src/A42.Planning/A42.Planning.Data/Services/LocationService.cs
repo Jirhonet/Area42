@@ -14,12 +14,14 @@ namespace A42.Planning.Domain.Services
             _locationRepository = LocationRepository;
         }
 
+        /// <inheritdoc />
         public IEnumerable<Location> Get()
         {
             IEnumerable<LocationDto> locationDtos = _locationRepository.Get();
             return locationDtos.Select(locationDto => locationDto.ToDomain());
         }
 
+        /// <inheritdoc />
         public void Add(Location location)
         {
             LocationDto locationDto = location.ToDto();
