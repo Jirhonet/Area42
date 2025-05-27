@@ -1,4 +1,6 @@
-﻿namespace A42.Planning.Domain
+﻿using System.Collections.ObjectModel;
+
+namespace A42.Planning.Domain
 {
     public class Planning
     {
@@ -16,8 +18,8 @@
         public DateOnly Date { get; private init; }
         public Team Team { get; private init; }
 
-        public IReadOnlyList<PlanningItem> Items
-            => _items;
+        public ReadOnlyCollection<PlanningItem> Items
+            => _items.AsReadOnly();
 
         public bool AddItem(PlanningItem item)
         {

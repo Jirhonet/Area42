@@ -1,4 +1,6 @@
-﻿namespace A42.Planning.Domain
+﻿using System.Collections.ObjectModel;
+
+namespace A42.Planning.Domain
 {
     public class Team
     {
@@ -13,13 +15,13 @@
 
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public IReadOnlyList<Employee> Employees
-            => _employees;
+        public ReadOnlyCollection<Employee> Employees
+            => _employees.AsReadOnly();
 
         public bool AddEmployee(Employee employee)
         {
             if (Employees.Any(e => e.Id == employee.Id))
-                throw new InvalidOperationException($"Employee '{employee.FullName}' is already in team {Name}.");
+                throw new InvalidOperationException($"Employee '{employee.FullName}' is already in team '{Name}'.");
 
             _employees.Add(employee);
 
