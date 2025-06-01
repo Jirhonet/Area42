@@ -27,5 +27,11 @@ namespace A42.Planning.Domain.Services
             TeamDto teamDto = team.ToDto();
             _teamRepository.Insert(teamDto);
         }
+
+        /// <inheritdoc />
+        public void Remove(Team team)
+        {
+            _teamRepository.Delete(team.Id);
+        }
     }
 }

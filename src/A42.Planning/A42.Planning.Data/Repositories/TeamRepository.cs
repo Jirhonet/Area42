@@ -36,5 +36,20 @@ namespace A42.Planning.Data.Repositories
 
             return Execute(sql, param);
         }
+
+        public int Delete(int id)
+        {
+            const string sql = """
+                DELETE FROM Team
+                WHERE Id = @Id
+                """;
+
+            var param = new
+            {
+                Id = id,
+            };
+
+            return Execute(sql, param);
+        }
     }
 }

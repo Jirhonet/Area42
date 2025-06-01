@@ -36,5 +36,11 @@ namespace A42.Planning.Domain.Services
             PlanningItemDto planningItemDto = planningItem.ToDto(planning.Team, planning.Date);
             _planningItemRepository.Insert(planningItemDto);
         }
+
+        /// <inheritdoc />
+        public void Remove(PlanningItem planningItem)
+        {
+            _planningItemRepository.Delete(planningItem.Id);
+        }
     }
 }

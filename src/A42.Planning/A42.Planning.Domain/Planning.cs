@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text;
 
 namespace A42.Planning.Domain
 {
@@ -23,6 +24,9 @@ namespace A42.Planning.Domain
 
         public bool AddItem(PlanningItem item)
         {
+            if (!ValidateItem(item))
+                return false;
+
             _items.Add(item);
 
             return true;
@@ -41,9 +45,22 @@ namespace A42.Planning.Domain
 
         public bool RemoveItem(PlanningItem item)
         {
-            _items.Remove(item);
+            return _items.Remove(item);
+        }
 
-            return true;
+        public string Display()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"Planning for {Date.ToString("yyyy-MM-dd")}");
+            sb.AppendLine($"Team: {Team.Name}");
+
+            foreach (PlanningItem item in Items)
+            {
+                sb.AppendLine($"{item.Start.ToString("HH:mm")} - {item.End.ToString("HH:mm")} {item.Title}");
+            }
+
+            return sb.ToString();
         }
     }
 }

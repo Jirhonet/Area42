@@ -35,13 +35,6 @@ namespace A42.Planning.Data.Repositories
                 TeamId = teamId,
             };
 
-            //IEnumerable<PlanningItemDto> planningItems = Query<PlanningItemDto>(sql, param);
-
-            //foreach (PlanningItemDto )
-            //{
-
-            //}
-
             return Query<PlanningItemDto>(sql, param);
         }
 
@@ -59,6 +52,21 @@ namespace A42.Planning.Data.Repositories
                 TeamId = planningItem.TeamId,
                 Start = planningItem.Start,
                 End = planningItem.End,
+            };
+
+            return Execute(sql, param);
+        }
+
+        public int Delete(int id)
+        {
+            const string sql = """
+                DELETE FROM PlanningItem
+                WHERE Id = @Id
+                """;
+
+            var param = new
+            {
+                Id = id,
             };
 
             return Execute(sql, param);

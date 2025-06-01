@@ -27,5 +27,11 @@ namespace A42.Planning.Domain.Services
             LocationDto locationDto = location.ToDto();
             _locationRepository.Insert(locationDto);
         }
+
+        /// <inheritdoc />
+        public void Remove(Location location)
+        {
+            _locationRepository.Delete(location.Id);
+        }
     }
 }
