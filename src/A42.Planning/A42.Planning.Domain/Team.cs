@@ -6,15 +6,15 @@ namespace A42.Planning.Domain
     {
         private List<Employee> _employees;
 
-        public Team(int id, string name, List<Employee> employees)
+        public Team(int id, string name, IEnumerable<Employee> employees)
         {
             Id = id;
             Name = name;
-            _employees = employees;
+            _employees = new List<Employee>(employees);
         }
 
         public int Id { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; private init; }
         public ReadOnlyCollection<Employee> Employees
             => _employees.AsReadOnly();
 

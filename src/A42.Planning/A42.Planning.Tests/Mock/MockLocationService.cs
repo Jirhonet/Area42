@@ -16,5 +16,10 @@ namespace A42.Planning.Tests.Mock
         {
             Locations.Add(location);
         }
+
+        public void Remove(Location location)
+        {
+            Locations.Remove(location);
+        }
     }
 }

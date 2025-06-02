@@ -16,5 +16,13 @@ namespace A42.Planning.Tests.Mock
         {
             planning.AddItem(planningItem);
         }
+
+        public void Remove(PlanningItem planningItem)
+        {
+            foreach (Domain.Planning planning in Plannings)
+            {
+                planning.RemoveItem(planningItem);
+            }
+        }
     }
 }

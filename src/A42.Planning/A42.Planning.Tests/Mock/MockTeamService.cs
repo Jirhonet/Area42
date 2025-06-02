@@ -16,5 +16,10 @@ namespace A42.Planning.Tests.Mock
         {
             Teams.Add(team);
         }
+
+        public void Remove(Team team)
+        {
+            Teams.Remove(team);
+        }
     }
 }

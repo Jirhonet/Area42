@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A42.Planning.Tests", "..\A4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A42.Planning.Data.Abstractions", "..\A42.Planning.Data.Abstractions\A42.Planning.Data.Abstractions.csproj", "{D9642F2B-6BAF-4158-8771-2075DF35AD29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A42.Planning.Domain.Abstractions", "..\A42.Planning.Domain.Abstractions\A42.Planning.Domain.Abstractions.csproj", "{05237BDD-310E-4B2E-BDA5-9CC17BD14420}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{D9642F2B-6BAF-4158-8771-2075DF35AD29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9642F2B-6BAF-4158-8771-2075DF35AD29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9642F2B-6BAF-4158-8771-2075DF35AD29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05237BDD-310E-4B2E-BDA5-9CC17BD14420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05237BDD-310E-4B2E-BDA5-9CC17BD14420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05237BDD-310E-4B2E-BDA5-9CC17BD14420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05237BDD-310E-4B2E-BDA5-9CC17BD14420}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
