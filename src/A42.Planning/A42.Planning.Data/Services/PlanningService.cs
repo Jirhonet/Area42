@@ -17,9 +17,7 @@ namespace A42.Planning.Domain.Services
         /// <inheritdoc />
         public Planning Get(DateOnly date, Team team)
         {
-            IEnumerable<PlanningItemDto> planningItemDtos = _planningItemRepository.Get(date, team.Id);
-
-            IEnumerable<PlanningItem> items = planningItemDtos.ToDomain();
+            IEnumerable<PlanningItem> items = GetPlanningItems(date, team);
 
             Planning planning = new Planning(
                 date: date,
@@ -28,6 +26,12 @@ namespace A42.Planning.Domain.Services
             );
 
             return planning;
+        }
+
+        private IEnumerable<PlanningItem> GetPlanningItems(DateOnly date, Team team)
+        {
+            IEnumerable<PlanningItemDto> planningItemDtos = _planningItemRepository.Get(date, team.Id);
+            return planningItemDtos.ToDomain();
         }
 
         /// <inheritdoc />
