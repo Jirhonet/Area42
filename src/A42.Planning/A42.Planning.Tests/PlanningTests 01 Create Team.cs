@@ -5,8 +5,8 @@ namespace A42.Planning.Tests
 {
     public partial class PlanningTests
     {
-        [TestMethod("PT 02: Get teams")]
-        public void PT_02_Get_Teams()
+        [TestMethod("P 01a: Create team with unique name")]
+        public void P_01a_CreateTeam_WithUniqueName()
         {
             // Arrange
             Employee employee1 = new Employee(1, "Employee 1");
@@ -40,6 +40,22 @@ namespace A42.Planning.Tests
             team2.Name.Should().Be("Team 2");
             team2.Employees.Should().HaveCount(0);
 
+        }
+
+        [TestMethod("P 01b: Create team with existing name")]
+        public void P_01b_CreateTeam_WithExistinName()
+        {
+            // Arrange
+            string teamName = "Existing Team";
+            Team existingTeam = new Team(1, teamName, new List<Employee>());
+            _teamService.Add(existingTeam);
+
+            // Act
+            Action action = () => _teamService.Add(new Team(2, teamName, new List<Employee>()));
+
+            // Assert
+            action.Should().Throw<InvalidOperationException>()
+                .WithMessage($"A team with name '{teamName}' already exists.");
         }
     }
 }

@@ -27,5 +27,15 @@ namespace A42.Planning.Domain
 
             return true;
         }
+
+        public bool RemoveEmployee(Employee employee)
+        {
+            if (!Employees.Any(e => e.Id == employee.Id))
+                throw new InvalidOperationException($"Employee '{employee.FullName}' is not in team '{Name}'.");
+
+            _employees.Remove(employee);
+
+            return true;
+        }
     }
 }
