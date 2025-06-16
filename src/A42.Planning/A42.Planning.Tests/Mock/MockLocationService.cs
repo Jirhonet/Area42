@@ -3,7 +3,7 @@ using A42.Planning.Domain;
 
 namespace A42.Planning.Tests.Mock
 {
-    public partial class MockLocationService : ILocationService
+    public class MockLocationService : ILocationService
     {
         internal List<Location> Locations { get; private set; } = new List<Location>();
 
@@ -14,6 +14,9 @@ namespace A42.Planning.Tests.Mock
 
         public void Add(Location location)
         {
+            if (Locations.Any(l => l.Name == location.Name))
+                throw new InvalidOperationException($"A location with name '{location.Name}' already exists.");
+
             Locations.Add(location);
         }
 

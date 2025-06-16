@@ -1,7 +1,5 @@
 using A42.Planning.Domain;
-using A42.Planning.Tests.Mock;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace A42.Planning.Tests
 {
@@ -42,7 +40,27 @@ namespace A42.Planning.Tests
 
             // Assert
             action.Should().Throw<InvalidOperationException>()
+                .WithMessage("Item already exists in planning.");
+        }
+
+        [TestMethod("P 07c: Add planning item to occupied time slot")]
+        public void P_07c_AddPlanningItem_ToOverlappingTimeSlot()
+        {
+            // Arrange
+            DateOnly date = DateOnly.FromDateTime(DateTime.Now);
+            Team team = new Team(1, "Team", new List<Employee>());
+            Location location = new Location(1, "Location");
+            PlanningItem existingItem = new PlanningItem(1, "Existing Item", location, new TimeOnly(10, 0), new TimeOnly(11, 0));
+            PlanningItem newItem = new PlanningItem(2, "New Item", location, new TimeOnly(10, 0), new TimeOnly(11, 20));
+            var planning = new Domain.Planning(date, team, new List<PlanningItem> { existingItem });
+            _planningService.Plannings.Add(planning);
+
+            // Act
+            Action action = () => _planningService.Add(planning, newItem);
+
+            // Assert
+            action.Should().Throw<InvalidOperationException>()
                 .WithMessage("Item overlaps with existing items.");
         }
     }
-} 
+}

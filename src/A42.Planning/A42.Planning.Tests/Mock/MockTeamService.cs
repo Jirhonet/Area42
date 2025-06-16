@@ -14,6 +14,9 @@ namespace A42.Planning.Tests.Mock
 
         public void Add(Team team)
         {
+            if (Teams.Any(t => t.Name == team.Name))
+                throw new InvalidOperationException($"A team with name '{team.Name}' already exists.");
+
             Teams.Add(team);
         }
 
