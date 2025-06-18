@@ -19,7 +19,7 @@ namespace A42.Planning.Data.Abstractions
         /// <summary>
         /// Removes an existing location.
         /// </summary>
-        /// <param name="location">Location to remove.</param>
-        public void Remove(Location location);
+        /// <param name="locationId">Location to remove.</param>
+        public void Remove(int locationId);
     }
 }

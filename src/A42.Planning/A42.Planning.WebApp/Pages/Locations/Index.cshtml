@@ -10,8 +10,12 @@
     <h1 class="display-4">Locations</h1>
 </div>
 
-<div class="toolbar">
+<div class="toolbar d-flex gap-2">
     <button onclick="showDialog()">+ Add</button>
+    <form method="POST" asp-page-handler="Delete">
+        <input type="hidden" name="selectedLocationId" value="@Model.SelectedLocationId" />
+        <button type="submit" @(Model.SelectedLocationId.HasValue ? "" : "disabled") class="destructive">- Delete</button>
+    </form>
 </div>
 
 <ul class="list-group header">
@@ -25,8 +29,15 @@
     <ul class="list-group">
         @foreach (Location location in @Model.Locations)
         {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>@location.Name</span>
+            <li class="list-group-item p-0 overflow-hidden">
+                <form method="POST" asp-page-handler="Select" style="margin:0;">
+                    <input type="hidden" name="selectedLocationId" value="@location.Id" />
+                    <button type="submit"
+                            class="list-group-item d-flex justify-content-between align-items-center w-100 text-start"
+                            style="border:none; background: @(location.Id == Model.SelectedLocationId ? "#e0e0e0" : "white"); padding: 0.75rem 1.25rem;">
+                        <span>@location.Name</span>
+                    </button>
+                </form>
             </li>
         }
     </ul>
@@ -39,7 +50,7 @@ else
 <form method="POST" id="dialog" class="dialog" style="display: none;">
     <p><b>Add new location</b></p>
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="New location" value="@Model.Name">
+    <input type="text" id="name" name="name" placeholder="New location">
     <br />
     <input type="submit" onclick="hideDialog()" value="Add">
 </form>

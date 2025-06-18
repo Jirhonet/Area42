@@ -18,6 +18,9 @@ namespace A42.Planning.WebApp.Pages.Teams
         public IEnumerable<Team> Teams { get; private set; } = [];
 
         [BindProperty]
+        public Team? SelectedTeam { get; set; }
+
+        [BindProperty]
         public string Name { get; set; } = string.Empty;
 
         public void OnGet()
@@ -36,6 +39,16 @@ namespace A42.Planning.WebApp.Pages.Teams
             _teamService.Add(team);
 
             ResetForm();
+            Load();
+        }
+
+        public void OnDelete()
+        {
+            if (SelectedTeam == null)
+                return;
+
+            _teamService.Remove(SelectedTeam);
+
             Load();
         }
 

@@ -1,3 +1,4 @@
+using A42.Planning.Data.Abstractions;
 using A42.Planning.Data.Repositories;
 using A42.Planning.Domain.Services;
 
@@ -50,13 +51,13 @@ namespace A42.Planning.WebApp
         }
 
         /// <summary>
-        /// Adds all services that implement <see cref="IService"/>
+        /// Adds all services
         /// </summary>
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
-            // Register all services
-            foreach (Type serviceType in typeof(IService).Assembly.GetExportedTypes().Where(t => !t.IsAbstract && t.GetInterfaces().Contains(typeof(IService))))
-                services.AddScoped(serviceType);
+            services.AddTransient<IPlanningService, PlanningService>();
+            services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<ILocationService, LocationService>();
 
             return services;
         }

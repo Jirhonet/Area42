@@ -29,9 +29,9 @@ namespace A42.Planning.Domain.Services
         }
 
         /// <inheritdoc />
-        public void Remove(Location location)
+        public void Remove(int locationId)
         {
-            _locationRepository.Delete(location.Id);
+            _locationRepository.Delete(locationId);
         }
     }
 }

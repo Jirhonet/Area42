@@ -1,0 +1,10 @@
+Duidelijke splitsing in projecten
+https://github.com/dotnet/eShop/tree/main/src
+https://github.com/dotnet/runtime/tree/main/src/libraries
+
+SOLID do/donts
+https://learn.microsoft.com/en-us/archive/msdn-magazine/2014/may/csharp-best-practices-dangers-of-violating-solid-principles-in-csharp
+https://medium.com/@jeslurrahman/understanding-solid-principles-in-net-c-a-practical-guide-with-code-examples-2e759010974e
+
+Tutorials - Unit tests
+https://www.youtube.com/watch?v=TytferBCLOo
