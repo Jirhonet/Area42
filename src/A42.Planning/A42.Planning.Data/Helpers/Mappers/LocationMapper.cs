@@ -8,6 +8,7 @@ namespace A42.Planning.Domain.Helpers.Mappers
         {
             LocationDto teamDto = new LocationDto()
             {
+                Id = location.Id,
                 Name = location.Name,
             };
 

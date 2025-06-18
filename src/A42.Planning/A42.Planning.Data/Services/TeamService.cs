@@ -29,9 +29,9 @@ namespace A42.Planning.Domain.Services
         }
 
         /// <inheritdoc />
-        public void Remove(Team team)
+        public void Remove(int teamId)
         {
-            _teamRepository.Delete(team.Id);
+            _teamRepository.Delete(teamId);
         }
     }
 }

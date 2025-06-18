@@ -18,36 +18,33 @@ namespace A42.Planning.WebApp.Pages.Teams
         public IEnumerable<Team> Teams { get; private set; } = [];
 
         [BindProperty]
-        public Team? SelectedTeam { get; set; }
-
-        [BindProperty]
-        public string Name { get; set; } = string.Empty;
+        public int? SelectedTeamId { get; set; }
 
         public void OnGet()
         {
             Load();
         }
 
-        public void OnPost()
+        public void OnPost(string name)
         {
-            Team team = new Team(
-                id: 0,
-                name: Name,
-                employees: []
-            );
+            Team team = new Team(0, name, []);
 
             _teamService.Add(team);
 
-            ResetForm();
             Load();
         }
 
-        public void OnDelete()
+        public void OnPostSelect(int selectedTeamId)
         {
-            if (SelectedTeam == null)
-                return;
+            SelectedTeamId = selectedTeamId;
 
-            _teamService.Remove(SelectedTeam);
+            Load();
+        }
+
+        public void OnPostDelete(int? selectedTeamId)
+        {
+            if (selectedTeamId.HasValue)
+                _teamService.Remove(selectedTeamId.Value);
 
             Load();
         }
@@ -55,11 +52,6 @@ namespace A42.Planning.WebApp.Pages.Teams
         public void Load()
         {
             Teams = _teamService.Get();
-        }
-
-        private void ResetForm()
-        {
-            Name = string.Empty;
         }
     }
 }

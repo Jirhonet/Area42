@@ -19,7 +19,7 @@ namespace A42.Planning.Data.Abstractions
         /// <summary>
         /// Removes an existing team.
         /// </summary>
-        /// <param name="team">Team to remove.</param>
-        public void Remove(Team team);
+        /// <param name="teamId">Team to remove.</param>
+        public void Remove(int teamId);
     }
 }

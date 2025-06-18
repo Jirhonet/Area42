@@ -6,17 +6,23 @@
     ViewData["Title"] = "Teams";
 }
 
+
 <div class="text-center">
     <h1 class="display-4">Teams</h1>
 </div>
 
-<div class="toolbar">
+<div class="toolbar d-flex gap-2">
     <button onclick="showDialog()">+ Add</button>
+    <form method="POST" asp-page-handler="Delete">
+        <input type="hidden" name="selectedTeamId" value="@Model.SelectedTeamId" />
+        <button type="submit" @(Model.SelectedTeamId.HasValue ? "" : "disabled") class="destructive">- Delete</button>
+    </form>
 </div>
 
 <ul class="list-group header">
     <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span>Name</span>
+        <span>Name</span>
+        <span>Employees</span>
     </li>
 </ul>
 
@@ -25,8 +31,16 @@
     <ul class="list-group">
         @foreach (Team team in @Model.Teams)
         {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>@team.Name</span>
+            <li class="list-group-item p-0 overflow-hidden">
+                <form method="POST" asp-page-handler="Select" style="margin:0;">
+                    <input type="hidden" name="selectedTeamId" value="@team.Id" />
+                    <button type="submit"
+                            class="list-group-item d-flex justify-content-between align-items-center w-100 text-start"
+                            style="border:none; background: @(team.Id == Model.SelectedTeamId ? "#e0e0e0" : "white"); padding: 0.75rem 1.25rem;">
+                        <span>@team.Name</span>
+                        <span>@team.Employees.Count</span>
+                    </button>
+                </form>
             </li>
         }
     </ul>
@@ -45,11 +59,11 @@ else
 </form>
 
 <script>
-  function showDialog() {
-      document.getElementById("dialog").style.display = "flex";
-  }
+    function showDialog() {
+        document.getElementById("dialog").style.display = "flex";
+    }
 
-  function hideDialog() {
-      document.getElementById("dialog").style.display = "none";
-  }
+    function hideDialog() {
+        document.getElementById("dialog").style.display = "none";
+    }
 </script>
