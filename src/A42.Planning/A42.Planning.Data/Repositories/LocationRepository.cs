@@ -22,6 +22,27 @@ namespace A42.Planning.Data.Repositories
             return Query<LocationDto>(sql);
         }
 
+        public IEnumerable<LocationDto> GetByIds(IEnumerable<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                return Enumerable.Empty<LocationDto>();
+
+            const string sql = """
+                SELECT
+                    l.Id,
+                    l.Name
+                FROM ParkLocation l
+                WHERE l.Id IN @Ids
+                """;
+
+            var param = new
+            {
+                Ids = ids,
+            };
+
+            return Query<LocationDto>(sql, param);
+        }
+
         public LocationDto GetById(int id)
         {
             const string sql = """

@@ -8,10 +8,12 @@ namespace A42.Planning.Domain.Services
     public class PlanningService : IPlanningService
     {
         private readonly PlanningItemRepository _planningItemRepository;
+        private readonly LocationRepository _locationRepository;
 
-        public PlanningService(PlanningItemRepository planningItemRepository)
+        public PlanningService(PlanningItemRepository planningItemRepository, LocationRepository locationRepository)
         {
             _planningItemRepository = planningItemRepository;
+            _locationRepository = locationRepository;
         }
 
         /// <inheritdoc />
@@ -30,8 +32,9 @@ namespace A42.Planning.Domain.Services
 
         private IEnumerable<PlanningItem> GetPlanningItems(DateOnly date, Team team)
         {
-            IEnumerable<PlanningItemDto> planningItemDtos = _planningItemRepository.Get(date, team.Id);
-            return planningItemDtos.ToDomain();
+            IEnumerable<PlanningItemDto> planningItemDtos = _planningItemRepository.Get(date.ToDateTime(new TimeOnly()), team.Id);
+            IEnumerable<LocationDto> locationDtos = _locationRepository.GetByIds(planningItemDtos.Select(p => p.Id));
+            return planningItemDtos.ToDomain(locationDtos);
         }
 
         /// <inheritdoc />

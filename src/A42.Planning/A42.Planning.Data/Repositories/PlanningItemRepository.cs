@@ -12,13 +12,13 @@ namespace A42.Planning.Data.Repositories
             _locationRepository = locationRepository;
         }
 
-        public IEnumerable<PlanningItemDto> Get(DateOnly date, int teamId)
+        public IEnumerable<PlanningItemDto> Get(DateTime date, int teamId)
         {
             const string sql = """
                 SELECT
                     p.Id,
                     p.Title,
-                    p.LocationId,
+                    p.ParkLocationId AS LocationId,
                     p.TeamId,
                     p.Start,
                     p.End
@@ -48,7 +48,7 @@ namespace A42.Planning.Data.Repositories
             var param = new
             {
                 Title = planningItem.Title,
-                LocationId = planningItem.Location.Id,
+                LocationId = planningItem.LocationId,
                 TeamId = planningItem.TeamId,
                 Start = planningItem.Start,
                 End = planningItem.End,

@@ -10,7 +10,7 @@ namespace A42.Planning.Domain.Helpers.Mappers
             {
                 Id = planningItem.Id,
                 Title = planningItem.Title,
-                Location = planningItem.Location.ToDto(),
+                LocationId = planningItem.Location.Id,
                 TeamId = team.Id,
                 Start = planningItem.Start.ToDateTimeOffset(date),
                 End = planningItem.End.ToDateTimeOffset(date)
@@ -19,12 +19,12 @@ namespace A42.Planning.Domain.Helpers.Mappers
             return planningItemDto;
         }
 
-        internal static PlanningItem ToDomain(this PlanningItemDto planningItemDto)
+        internal static PlanningItem ToDomain(this PlanningItemDto planningItemDto, LocationDto locationDto)
         {
             PlanningItem planningItem = new PlanningItem(
                 id: planningItemDto.Id,
                 title: planningItemDto.Title,
-                location: planningItemDto.Location.ToDomain(),
+                location: locationDto.ToDomain(),
                 start: planningItemDto.Start.ToTimeOnly(),
                 end: planningItemDto.End.ToTimeOnly()
             );
@@ -32,9 +32,9 @@ namespace A42.Planning.Domain.Helpers.Mappers
             return planningItem;
         }
 
-        internal static IEnumerable<PlanningItem> ToDomain(this IEnumerable<PlanningItemDto> planningItemDtos)
+        internal static IEnumerable<PlanningItem> ToDomain(this IEnumerable<PlanningItemDto> planningItemDtos, IEnumerable<LocationDto> locationDtos)
         {
-            return planningItemDtos.Select(planningItemDto => planningItemDto.ToDomain());
+            return planningItemDtos.Select(planningItemDto => planningItemDto.ToDomain(locationDtos.FirstOrDefault(l => l.Id == planningItemDto.LocationId) ?? throw new Exception("No location found for planning item.")));
         }
     }
 }

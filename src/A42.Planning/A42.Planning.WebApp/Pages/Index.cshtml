@@ -7,6 +7,55 @@
 
 <div class="text-center">
     <h1 class="display-4">Planning</h1>
-    <p>Date selector</p>
-    <p>Team selector</p>
 </div>
+
+<form method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="SelectedDate">Date</label>
+                <input asp-for="SelectedDate" type="date" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="SelectedTeamId">Team</label>
+                <select asp-for="SelectedTeamId" asp-items="Model.Teams" class="form-control">
+                    <option value="">-- Select Team --</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-primary form-control">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+
+@if (Model.Planning != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Title</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Planning.Items)
+            {
+                <tr>
+                    <td>@item.Start.ToString("HH:mm")</td>
+                    <td>@item.End.ToString("HH:mm")</td>
+                    <td>@item.Title</td>
+                    <td>@item.Location.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
