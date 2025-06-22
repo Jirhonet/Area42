@@ -70,6 +70,24 @@ namespace A42.Planning.WebApp.Pages
             Load();
         }
 
+        public void OnPostDelete(int? selectedPlanningItemId)
+        {
+            if (!SelectedTeamId.HasValue)
+                return;
+
+            if (selectedPlanningItemId.HasValue)
+            {
+                Team team = _teamService.GetById(SelectedTeamId.Value);
+                Domain.Planning planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
+
+                PlanningItem planningItem = planning.Items.First(pi => pi.Id == selectedPlanningItemId.Value);
+
+                _planningService.Remove(planningItem);
+            }
+
+            Load();
+        }
+
         public void Load()
         {
             IEnumerable<Team> teams = _teamService.Get();

@@ -48,7 +48,10 @@ else
 }
 
 <form method="POST" id="dialog" class="dialog" style="display: none;">
-    <p><b>Add new location</b></p>
+    <div class="d-flex justify-content-between">
+        <p><b>Add a new location</b></p>
+        <button type="button" class="close-button" onclick="hideDialog()">✖</button>
+    </div>
     <label for="name">Name</label>
     <input type="text" id="name" name="name" placeholder="New location">
     <br />
