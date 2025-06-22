@@ -22,6 +22,13 @@ namespace A42.Planning.Domain.Services
         }
 
         /// <inheritdoc />
+        public Location GetById(int locationId)
+        {
+            LocationDto locationDto = _locationRepository.GetById(locationId);
+            return locationDto.ToDomain();
+        }
+
+        /// <inheritdoc />
         public void Add(Location location)
         {
             LocationDto locationDto = location.ToDto();

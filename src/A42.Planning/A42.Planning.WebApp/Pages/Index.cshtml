@@ -1,5 +1,6 @@
 ﻿@page
 @namespace A42.Planning.WebApp.Pages
+@using A42.Planning.Domain
 @model IndexModel
 @{
     ViewData["Title"] = "Planning";
@@ -37,6 +38,14 @@
 
 @if (Model.Planning != null)
 {
+    <div class="toolbar d-flex gap-2">
+        <button onclick="showDialog()">+ Add</button>
+        <form method="POST" asp-page-handler="Delete">
+            <input type="hidden" name="selectedLocationId" value="@Model.SelectedPlanningItemId" />
+            <button type="submit" @(Model.SelectedPlanningItemId.HasValue ? "" : "disabled") class="destructive">- Delete</button>
+        </form>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -47,7 +56,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Planning.Items)
+            @foreach (PlanningItem item in Model.Planning.Items)
             {
                 <tr>
                     <td>@item.Start.ToString("HH:mm")</td>
@@ -59,3 +68,29 @@
         </tbody>
     </table>
 }
+
+<form method="POST" id="dialog" class="dialog" style="display: none;">
+    <p><b>Add a new item</b></p>
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" placeholder="New item">
+    <label for="SelectedLocationId">Location</label>
+    <select asp-for="SelectedLocationId" asp-items="Model.Locations" class="form-control">
+        <option value="">-- Select Location --</option>
+    </select>
+    <label for="start">Start Time</label>
+    <input type="time" id="start" name="start" required>
+    <label for="end">End Time</label>
+    <input type="time" id="end" name="end" required>
+    <br />
+    <input type="submit" onclick="hideDialog()" value="Add">
+</form>
+
+<script>
+    function showDialog() {
+        document.getElementById("dialog").style.display = "flex";
+    }
+
+    function hideDialog() {
+        document.getElementById("dialog").style.display = "none";
+    }
+</script>

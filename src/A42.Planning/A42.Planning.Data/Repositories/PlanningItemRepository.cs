@@ -41,7 +41,7 @@ namespace A42.Planning.Data.Repositories
         public int Insert(PlanningItemDto planningItem)
         {
             const string sql = """
-                INSERT INTO PlanningItem (Title, LocationId, TeamId, Start, End)
+                INSERT INTO PlanningItem (Title, ParkLocationId, TeamId, Start, End)
                 VALUES (@Title, @LocationId, @TeamId, @Start, @End)
                 """;
 

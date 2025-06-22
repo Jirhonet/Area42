@@ -109,3 +109,8 @@ input[type="submit"] {
     border-color: white;
     font-weight: bold;
 }
+
+.btn-primary {
+    background-color: var(--green);
+    border: none;
+}

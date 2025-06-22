@@ -22,6 +22,13 @@ namespace A42.Planning.Domain.Services
         }
 
         /// <inheritdoc />
+        public Team GetById(int id)
+        {
+            TeamDto teamDto = _teamRepository.GetById(id);
+            return teamDto.ToDomain();
+        }
+
+        /// <inheritdoc />
         public void Add(Team team)
         {
             TeamDto teamDto = team.ToDto();

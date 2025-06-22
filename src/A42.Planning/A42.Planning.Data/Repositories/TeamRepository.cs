@@ -22,6 +22,25 @@ namespace A42.Planning.Data.Repositories
             return Query<TeamDto>(sql);
         }
 
+        public TeamDto GetById(int id)
+        {
+            const string sql = """
+                SELECT
+                    t.Id,
+                    t.Name
+                FROM Team t
+                WHERE
+                    t.Id = @Id
+                """;
+
+            var param = new
+            {
+                Id = id,
+            };
+
+            return QuerySingle<TeamDto>(sql, param);
+        }
+
         public int Insert(TeamDto team)
         {
             const string sql = """

@@ -11,6 +11,13 @@ namespace A42.Planning.Data.Abstractions
         public IEnumerable<Team> Get();
 
         /// <summary>
+        /// Gets a single team by its id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Team with the given id.</returns>
+        public Team GetById(int id);
+
+        /// <summary>
         /// Adds a new team.
         /// </summary>
         /// <param name="team">Team to add.</param>

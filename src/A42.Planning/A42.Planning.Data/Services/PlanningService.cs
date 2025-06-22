@@ -33,7 +33,7 @@ namespace A42.Planning.Domain.Services
         private IEnumerable<PlanningItem> GetPlanningItems(DateOnly date, Team team)
         {
             IEnumerable<PlanningItemDto> planningItemDtos = _planningItemRepository.Get(date.ToDateTime(new TimeOnly()), team.Id);
-            IEnumerable<LocationDto> locationDtos = _locationRepository.GetByIds(planningItemDtos.Select(p => p.Id));
+            IEnumerable<LocationDto> locationDtos = _locationRepository.GetByIds(planningItemDtos.Select(p => p.LocationId));
             return planningItemDtos.ToDomain(locationDtos);
         }
 

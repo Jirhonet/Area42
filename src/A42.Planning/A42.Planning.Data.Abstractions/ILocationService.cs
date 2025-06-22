@@ -11,6 +11,13 @@ namespace A42.Planning.Data.Abstractions
         public IEnumerable<Location> Get();
 
         /// <summary>
+        /// Gets a single location by its id.
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <returns>The location with the given id.</returns>
+        public Location GetById(int locationId);
+
+        /// <summary>
         /// Adds a new location.
         /// </summary>
         /// <param name="location">Location to add.</param>
