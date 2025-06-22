@@ -1,11 +1,10 @@
 using A42.Planning.Data.Abstractions;
 using A42.Planning.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace A42.Planning.WebApp.Pages.Teams
 {
-    public class IndexModel : PageModel
+    public class IndexModel : AreaPageModel
     {
         private readonly ITeamService _teamService;
 
@@ -22,31 +21,59 @@ namespace A42.Planning.WebApp.Pages.Teams
 
         public void OnGet()
         {
-            Load();
+            try
+            {
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPost(string name)
         {
-            Team team = new Team(0, name, []);
+            try
+            {
+                Team team = new Team(0, name, []);
 
-            _teamService.Add(team);
+                _teamService.Add(team);
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPostSelect(int selectedTeamId)
         {
-            SelectedTeamId = selectedTeamId;
+            try
+            {
+                SelectedTeamId = selectedTeamId;
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPostDelete(int? selectedTeamId)
         {
-            if (selectedTeamId.HasValue)
-                _teamService.Remove(selectedTeamId.Value);
+            try
+            {
+                if (selectedTeamId.HasValue)
+                    _teamService.Remove(selectedTeamId.Value);
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void Load()

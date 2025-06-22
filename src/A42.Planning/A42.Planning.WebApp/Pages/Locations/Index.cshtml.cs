@@ -1,11 +1,10 @@
 using A42.Planning.Data.Abstractions;
 using A42.Planning.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace A42.Planning.WebApp.Pages.Locations
 {
-    public class IndexModel : PageModel
+    public class IndexModel : AreaPageModel
     {
         private readonly ILocationService _locationService;
 
@@ -22,31 +21,59 @@ namespace A42.Planning.WebApp.Pages.Locations
 
         public void OnGet()
         {
-            Load();
+            try
+            {
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPost(string name)
         {
-            Location location = new Location(0, name);
+            try
+            {
+                Location location = new Location(0, name);
 
-            _locationService.Add(location);
+                _locationService.Add(location);
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPostSelect(int selectedLocationId)
         {
-            SelectedLocationId = selectedLocationId;
+            try
+            {
+                SelectedLocationId = selectedLocationId;
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPostDelete(int? selectedLocationId)
         {
-            if (selectedLocationId.HasValue)
-                _locationService.Remove(selectedLocationId.Value);
+            try
+            {
+                if (selectedLocationId.HasValue)
+                    _locationService.Remove(selectedLocationId.Value);
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void Load()

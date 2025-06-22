@@ -70,3 +70,12 @@ else
         document.getElementById("dialog").style.display = "none";
     }
 </script>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <script>
+        window.onload = function () {
+            alert("@Model.Error");
+        }
+    </script>
+}

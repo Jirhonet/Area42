@@ -40,6 +40,9 @@ namespace A42.Planning.Domain.Services
         /// <inheritdoc />
         public void Add(Planning planning, PlanningItem planningItem)
         {
+            if (!planning.AddItem(planningItem))
+                throw new Exception("Unable to add planning item");
+
             PlanningItemDto planningItemDto = planningItem.ToDto(planning.Team, planning.Date);
             _planningItemRepository.Insert(planningItemDto);
         }

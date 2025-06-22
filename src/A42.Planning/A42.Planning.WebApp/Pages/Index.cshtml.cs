@@ -1,12 +1,11 @@
 using A42.Planning.Data.Abstractions;
 using A42.Planning.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace A42.Planning.WebApp.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : AreaPageModel
     {
         private readonly ITeamService _teamService;
         private readonly ILocationService _locationService;
@@ -37,55 +36,85 @@ namespace A42.Planning.WebApp.Pages
 
         public void OnGet()
         {
-            Load();
+            try
+            {
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPost(string title, DateTime start, DateTime end)
         {
-            if (!SelectedTeamId.HasValue || !SelectedLocationId.HasValue)
-                return;
+            try
+            {
+                if (!SelectedTeamId.HasValue || !SelectedLocationId.HasValue)
+                    return;
 
-            Location location = _locationService.GetById(SelectedLocationId.Value);
+                Location location = _locationService.GetById(SelectedLocationId.Value);
 
-            PlanningItem planningItem = new PlanningItem(
-                id: 0,
-                title: title,
-                location: location,
-                start: TimeOnly.FromDateTime(start),
-                end: TimeOnly.FromDateTime(end)
-            );
+                PlanningItem planningItem = new PlanningItem(
+                    id: 0,
+                    title: title,
+                    location: location,
+                    start: TimeOnly.FromDateTime(start),
+                    end: TimeOnly.FromDateTime(end)
+                );
 
-            Team team = _teamService.GetById(SelectedTeamId.Value);
-            Domain.Planning planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
+                Team team = _teamService.GetById(SelectedTeamId.Value);
+                Domain.Planning planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
 
-            _planningService.Add(planning, planningItem);
+                _planningService.Add(planning, planningItem);
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
-        public void OnPostSelect(int selectedPlanningItemId)
+        public void OnPostSelect(int selectedPlanningItemId, int? selectedTeamId, DateTime selectedDate)
         {
-            SelectedPlanningItemId = selectedPlanningItemId;
+            try
+            {
+                SelectedPlanningItemId = selectedPlanningItemId;
+                SelectedTeamId = selectedTeamId;
+                SelectedDate = selectedDate;
 
-            Load();
+                Load();
+            }
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void OnPostDelete(int? selectedPlanningItemId)
         {
-            if (!SelectedTeamId.HasValue)
-                return;
-
-            if (selectedPlanningItemId.HasValue)
+            try
             {
-                Team team = _teamService.GetById(SelectedTeamId.Value);
-                Domain.Planning planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
+                if (!SelectedTeamId.HasValue)
+                    return;
 
-                PlanningItem planningItem = planning.Items.First(pi => pi.Id == selectedPlanningItemId.Value);
+                if (selectedPlanningItemId.HasValue)
+                {
+                    Team team = _teamService.GetById(SelectedTeamId.Value);
+                    Domain.Planning planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
 
-                _planningService.Remove(planningItem);
+                    PlanningItem planningItem = planning.Items.First(pi => pi.Id == selectedPlanningItemId.Value);
+
+                    _planningService.Remove(planningItem);
+                }
+
+                Load();
             }
-
-            Load();
+            catch (Exception ex)
+            {
+                ShowError(ex);
+            }
         }
 
         public void Load()
@@ -104,6 +133,17 @@ namespace A42.Planning.WebApp.Pages
                     Planning = _planningService.Get(DateOnly.FromDateTime(SelectedDate), team);
                 }
             }
+        }
+
+        public override void ShowError(Exception ex)
+        {
+            base.ShowError(ex);
+
+            IEnumerable<Team> teams = _teamService.Get();
+            Teams = new SelectList(teams, nameof(Team.Id), nameof(Team.Name), SelectedTeamId);
+
+            IEnumerable<Location> locations = _locationService.Get();
+            Locations = new SelectList(locations, nameof(Location.Id), nameof(Location.Name), SelectedLocationId);
         }
     }
 }
