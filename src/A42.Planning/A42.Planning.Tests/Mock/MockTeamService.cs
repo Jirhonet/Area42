@@ -24,5 +24,15 @@ namespace A42.Planning.Tests.Mock
         {
             Teams.Remove(team);
         }
+
+        public Team GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int teamId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,5 +24,15 @@ namespace A42.Planning.Tests.Mock
         {
             Locations.Remove(location);
         }
+
+        public Location GetById(int locationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int locationId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
